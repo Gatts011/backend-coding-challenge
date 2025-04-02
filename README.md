@@ -1,94 +1,79 @@
-# 🔐 Secure Messaging API - Backend Coding Challenge
+# 🔐 Secure Messaging API
 
-This challenge is designed to test your backend skills in API design,
-encryption, debugging, and secure data handling. You are expected to
-think critically, solve problems creatively, and structure your solution
-with best coding practices. You may use either **Express (Node.js)** or
-**Flask (Python)**.
+> A modern, secure messaging API implemented in both TypeScript and Python, featuring end-to-end encryption, Docker support, and comprehensive testing.
 
-## ⏱ Time Limit
+## 🌟 Features
 
-**1 Hour** --- Please manage your time accordingly.
+- ✨ End-to-end encryption with AES-256-GCM
+- 🔒 User-specific message encryption
+- ⚡ Rate limiting and input validation
+- 🕒 Message auto-expiry
+- 🎯 Health monitoring
+- 🐳 Docker support
 
-## 🎯 Objective
+## 🏗️ Architecture
 
-Build a secure messaging backend with three main features:
+```
+typescript_version/  # Express.js + TypeScript
+python_version/     # Flask + Python
+```
 
-1.  Store encrypted messages per user using secure encryption.
-2.  Allow only the original user to decrypt and retrieve messages.
-3.  Debug a broken decryption function and explain your fix.
+*Detailed documentation available in each version's directory.*
 
-## 📦 Required Endpoints
+## 🚀 Quick Start
 
-### 1. POST /messages
+### Using Docker (Recommended)
+```bash
+docker-compose up --build
+```
+- TypeScript API → http://localhost:3000
+- Python API → http://localhost:3001
 
-Store a message for a user. Encrypt it using AES before storage.
+### Manual Setup
 
-### 2. GET /messages/:userId
+TypeScript:
+```bash
+cd typescript_version
+npm install && npm start
+```
 
-Retrieve all messages for the specified user (after decryption).
+Python:
+```bash
+cd python_version
+pip install -r requirements.txt
+python app.py
+```
 
-### 3. POST /debug/decrypt
+## 🔌 API Endpoints
 
-Debug and fix the broken decryption logic provided in the file
-`debug_code.py` or `debug_code.js`.
+```http
+POST /messages
+GET  /messages/:userId
+GET  /messages/health
+```
 
-## 🔐 Encryption Rules
+## 🧪 Testing
 
--   Use **AES (AES-256)** encryption only.
--   like `pycryptodome` or `crypto-js`.
--   Use only:
-    -   `crypto` module in Node.js
-    -   `cryptography` or built-in `hashlib + hmac` in Python
--   IV must be random per message and embedded in the encrypted payload
-    so it can be extracted and reused for decryption.
--   Return encrypted values in `base64` format.
+```bash
+# TypeScript
+cd typescript_version && npm test
 
-## 🧠 Required Design Write-Up
+# Python
+cd python_version && pytest
+```
 
-Include this in your README or code comments before implementation:
+## 🔐 Security Features
 
-1.  What encryption method and mode did you choose, and why?
-2.  How will you ensure only the original user can access their
-    messages?
-3.  How do you plan to store and later extract the IV?
-4.  How would you prevent user ID spoofing to access other users\'
-    messages?
+- AES-256-GCM encryption
+- Per-message IV generation
+- Message authentication
+- Rate limiting
+- Input validation
+- Token-based auth
 
-## 🐞 Debug Task
-
-Inside the file `debug_code.py` or `debug_code.js` is a broken function
-`broken_decrypt()`.
-
-You must:
-
--   Identify and fix the issue.
--   Write a test case that reproduces the problem.
--   Comment your fix explaining what went wrong and why your fix works.
-
-## ✅ Evaluation Criteria
-
--   Correct and working encryption/decryption logic
--   Clean, readable, and modular code structure
--   Secure handling of message data and per-user access
--   Thoughtful answers to the design questions
--   Successful debugging with clear explanation
--   Edge case handling and meaningful error responses
-
-## 🚀 Bonus (Optional)
-
--   Implement message expiry (auto-delete after 10 minutes)
--   Add basic token-based authentication
--   Write unit tests for encryption, storage, and retrieval
-
-## 📥 Submission
-
--   Submit your full project folder via zip or GitHub repository.
--   Include a `README.md` with:
-    -   Instructions to run the project
-    -   Your answers to the design questions
-    -   Any assumptions or constraints you considered
-
-**Reminder:** Write professional-grade, clean, and thoughtful code.
-Structure your project clearly and keep logic modular. We\'ll be
-reviewing both code and reasoning.
+## 📚 Documentation
+See individual READMEs in each version's directory for:
+- Detailed API documentation
+- Security implementation details
+- Development guidelines
+- Testing instructions

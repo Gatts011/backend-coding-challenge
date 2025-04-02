@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  typescript-api:
+    build:
+      context: ./typescript_version
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - ENCRYPTION_SECRET=${ENCRYPTION_SECRET}
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "http://localhost:3000/messages/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  python-api:
+    build:
+      context: ./python_version
+      dockerfile: Dockerfile
+    ports:
+      - "3001:3000"
+    environment:
+      - FLASK_ENV=production
+      - PORT=3000
+      - ENCRYPTION_SECRET=${ENCRYPTION_SECRET}
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/messages/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3 
